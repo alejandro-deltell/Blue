@@ -113,13 +113,13 @@ public class Movement : MonoBehaviour
     // CACHE - e.g. references for readability or speed
     // STATE - private instance (member) variables
 
-    [SerializeField] float mainThrust = 100f;
-    [SerializeField] float rotationThrust = 100f;
-    [SerializeField] AudioClip mainEngine;
+    [SerializeField] float mainThrust = 5000f;
+    //[SerializeField] float rotationThrust = 100f;
+    //[SerializeField] AudioClip mainEngine;
 
-    [SerializeField] ParticleSystem mainEngineParticles;
-    [SerializeField] ParticleSystem leftThrusterParticles;
-    [SerializeField] ParticleSystem rightThrusterParticles;
+    //[SerializeField] ParticleSystem mainEngineParticles;
+    //[SerializeField] ParticleSystem leftThrusterParticles;
+    //[SerializeField] ParticleSystem rightThrusterParticles;
 
     Rigidbody rb;
     AudioSource audioSource;
@@ -128,22 +128,25 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ProcessThrust();
-        ProcessRotation();
+        //ProcessRotation();
     }
 
     void ProcessThrust()
     {
-        Thrusting();
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);      
+        }
     }
 
-    void ProcessRotation()
+    /*void ProcessRotation()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -222,5 +225,5 @@ public class Movement : MonoBehaviour
         rb.freezeRotation = true;  // freezing rotation so we can manually rotate
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
         rb.freezeRotation = false;  // unfreezing rotation so the physics system can take over
-    }
+    }*/
 }
