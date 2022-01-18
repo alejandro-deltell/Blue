@@ -11,8 +11,8 @@ public class CollisionHandler : MonoBehaviour
     public AudioClip crashAudio;
     public AudioClip finishAudio;
 
-    public ParticleSystem crashParticles;
-    public ParticleSystem finishParticles;
+    [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] ParticleSystem finishParticles;
 
     bool isTransitioning = false;
     bool collisionDisabled = false;
@@ -35,11 +35,11 @@ public class CollisionHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
 
-            case "Friendly":
-                Debug.Log("This thing is friendly!");
+            case "Launchpad":
+                Debug.Log("Launchpad touched!");
                 break;
 
-            case "Finish":
+            case "FinishTag":
                 FinishedLevel();
                 break;
 
@@ -57,7 +57,7 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    void NextLevel()
+    /*void NextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
@@ -67,17 +67,17 @@ public class CollisionHandler : MonoBehaviour
         }
 
         SceneManager.LoadScene(nextSceneIndex);
-    }
+    }*/
 
-    private void Update()
+    /*private void Update()
     {
         Cheats();
-    }
+    }*/
 
 
 
 
-    void Cheats()
+    /*void Cheats()
     {
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -89,14 +89,14 @@ public class CollisionHandler : MonoBehaviour
         {
             collisionDisabled = !collisionDisabled; // toggle collision
         }
-    }
+    }*/
 
     void StartCrashSequence()
     {
 
         isTransitioning = true;
-        audioSource.Stop();
-        audioSource.PlayOneShot(crashAudio);
+        //audioSource.Stop();
+        //audioSource.PlayOneShot(crashAudio);
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", delay);
@@ -107,11 +107,11 @@ public class CollisionHandler : MonoBehaviour
     {
 
         isTransitioning = true;
-        audioSource.Stop();
-        audioSource.PlayOneShot(finishAudio);
+        //audioSource.Stop();
+        //audioSource.PlayOneShot(finishAudio);
         finishParticles.Play();
         GetComponent<Movement>().enabled = false;
-        Invoke("NextLevel", delay);
+        //Invoke("NextLevel", delay);
 
     }
 }

@@ -113,7 +113,7 @@ public class Movement : MonoBehaviour
     // CACHE - e.g. references for readability or speed
     // STATE - private instance (member) variables
 
-    [SerializeField] float mainThrust = 5000f;
+    [SerializeField] float mainThrust = 1000f;
     [SerializeField] float rotationThrust = 5000f;
     [SerializeField] AudioClip mainEngine;
 
@@ -170,7 +170,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            StopTrhusting();
+            StopThrusting();
         }
     }
 
@@ -188,7 +188,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void StopTrhusting()
+    void StopThrusting()
     {
         //audioSource.Stop();
         mainEngineParticles.Stop();
