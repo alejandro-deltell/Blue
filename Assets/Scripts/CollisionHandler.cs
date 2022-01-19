@@ -96,7 +96,7 @@ public class CollisionHandler : MonoBehaviour
 
         isTransitioning = true;
         //audioSource.Stop();
-        //audioSource.PlayOneShot(crashAudio);
+        audioSource.PlayOneShot(crashAudio);
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", delay);
@@ -108,7 +108,7 @@ public class CollisionHandler : MonoBehaviour
 
         isTransitioning = true;
         //audioSource.Stop();
-        //audioSource.PlayOneShot(finishAudio);
+        audioSource.PlayOneShot(finishAudio);
         finishParticles.Play();
         GetComponent<Movement>().enabled = false;
         //Invoke("NextLevel", delay);

@@ -113,13 +113,12 @@ public class Movement : MonoBehaviour
     // CACHE - e.g. references for readability or speed
     // STATE - private instance (member) variables
 
-    [SerializeField] float mainThrust = 1000f;
-    [SerializeField] float rotationThrust = 5000f;
+    [SerializeField] float mainThrust = 2000f;
+    [SerializeField] float rotationThrust = 2000f;
     [SerializeField] AudioClip mainEngine;
 
     [SerializeField] ParticleSystem mainEngineParticles;
-    //[SerializeField] ParticleSystem leftThrusterParticles;
-    //[SerializeField] ParticleSystem rightThrusterParticles;
+
 
     Rigidbody rb;
     AudioSource audioSource;
@@ -128,23 +127,16 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessThrust();
+        Thrusting();
         ProcessRotation();
     }
 
-    void ProcessThrust()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            StartThrusting();      
-        }
-    }
+
 
     void ProcessRotation()
     {
@@ -155,10 +147,6 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             LeftRotation();
-        }
-        else
-        {
-            StopRotation();
         }
     }
 
@@ -177,11 +165,7 @@ public class Movement : MonoBehaviour
     void StartThrusting()
     {
         rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-        /*if (!audioSource.isPlaying)
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }*/
+
         if (!mainEngineParticles.isPlaying)
         {
             mainEngineParticles.Play();
@@ -190,7 +174,6 @@ public class Movement : MonoBehaviour
 
     void StopThrusting()
     {
-        //audioSource.Stop();
         mainEngineParticles.Stop();
     }
 
@@ -199,25 +182,11 @@ public class Movement : MonoBehaviour
     void RightRotation()
     {
         ApplyRotation(rotationThrust);
-        /*if (!rightThrusterParticles.isPlaying)
-        {
-            rightThrusterParticles.Play();
-        }*/
     }
 
     void LeftRotation()
     {
         ApplyRotation(-rotationThrust);
-        /*if (!leftThrusterParticles.isPlaying)
-        {
-            leftThrusterParticles.Play();
-        }*/
-    }
-
-    void StopRotation()
-    {
-        //rightThrusterParticles.Stop();
-        //aleftThrusterParticles.Stop();
     }
 
     void ApplyRotation(float rotationThisFrame)
